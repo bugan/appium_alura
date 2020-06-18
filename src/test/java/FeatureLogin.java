@@ -1,5 +1,6 @@
 import PageObjects.ListaProdutosPageObject;
 import PageObjects.LoginPageObject;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,7 +25,7 @@ public class FeatureLogin {
     }
 
     @Test
-    public void posso_logar_com_um_usuário_cadastrado() throws NoSuchElementException {
+    public void posso_logar_com_um_usuário_cadastrado() {
         var driver = AppiumDriverConfig.Instance().getDriver();
         var paginaLogin = new LoginPageObject(driver);
         paginaLogin.BuscarElementos();
@@ -34,7 +35,7 @@ public class FeatureLogin {
         paginaLogin = paginaCadastro.Cadastar("usuarionovo", "1234567","1234567");
         paginaLogin.BuscarElementos();
         var paginaProdutos = paginaLogin.Logar("usuarionovo", "1234567");
-        paginaProdutos.BuscarElementos();
+        Assert.assertTrue(paginaProdutos.TelaCarregada());
     }
 
 
